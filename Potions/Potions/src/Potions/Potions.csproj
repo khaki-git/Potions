@@ -7,4 +7,16 @@
         <Version>0.1.0</Version>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Reference Include="com.github.PEAKModding.PEAKLib.Core">
+        <HintPath>..\..\..\..\..\..\Documents\peaklib\com.github.PEAKModding.PEAKLib.Core.dll</HintPath>
+      </Reference>
+      <Reference Include="com.github.PEAKModding.PEAKLib.Items">
+        <HintPath>..\..\..\..\..\..\Documents\peaklib\com.github.PEAKModding.PEAKLib.Items.dll</HintPath>
+      </Reference>
+      <Reference Include="com.github.PEAKModding.PEAKLib.Stats">
+        <HintPath>..\..\..\..\..\..\Documents\peaklib\com.github.PEAKModding.PEAKLib.Stats.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
