@@ -15,7 +15,7 @@ public class ReviveTheHomies: PotionEffect
 
         foreach (var item in list)
         {
-            item.photonView.RPC("RPCA_ReviveAtPosition", RpcTarget.All, character.transform.position + Vector3.up  * 3, false);
+            item.photonView.RPC("RPCA_ReviveAtPosition", RpcTarget.All, character.Center + Vector3.up * 3, false);
         }
     }
 

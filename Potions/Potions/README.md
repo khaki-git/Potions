@@ -1,31 +1,69 @@
 # Potions
+Adds potions to PEAK which can brewed using two ingredients at a Cauldron. This mod also contains a small API for developers to add their own potions.
 
-Describe your project here!
+### Recipes
 
-## Template Instructions
+| Name                   | Recipe                                 | Drink Time | Effects                                                                                     |
+| ---------------------- | -------------------------------------- | ---------- | ------------------------------------------------------------------------------------------- |
+| Vile Potion            | Default Potion                         | 4.5s       | 110% Poison total beginning 10s after consuming                                             |
+| Rat Poison             | Vile Potion + Green Crispberry         | 0.5s       | Instantly kills the user                                                                    |
+| Potion of Happiness    | Any Berrynana Peel + Yellow Crispberry | 4.5s       | Provides a Morale Boost to everyone (which gives a whole bar of reserve stamina)            |
+| Erratic Potion         | Big Lollipop + Energy Drink            | 4.5s       | Provides the effects of the Big Lollipop and the Energy Drink at the same time for 20s      |
+| Temperate Potion       | Any Clusterberry + Cluster Shroom      | 4.5s       | Provides the Temperate affliction for 120s which removes 10% of your cold & hot each second |
+| Numbness Potion        | Any Mushroom + Any Mushroom            | 4.5f       | Removes all injury for 120s and then gives it back after                                    |
+| Potion of Selflessness | Remedy Fungus + Shelf Fungus           | 4.5f       | Respawns all fallen teammates on the user and then kills the user                           |
 
-You can remove this section after you've set up your project.
 
-Next steps:
+### For developers: Making custom potion recipes
+To create a custom potion: Create an instance of the Potions.APIs.Potion class and register it using Potions.APIs.PotionAPI.RegisterPotion
+```csharp
+using Potions.APIs;
+using BepInEx;
 
-- Create a copy of the `Config.Build.user.props.template` file and name it `Config.Build.user.props`
-  - This will automate copying your plugin assembly to `BepInEx/plugins/`
-  - Configure the paths to point to your game path and your `BepInEx/plugins/`
-  - Game assembly references should work if the path to the game is valid
-- Search `TODO` in the whole project to see what you should configure or modify
+namespace MyPotionPack;
 
-### Thunderstore Packaging
-
-This template comes with Thunderstore packaging built-in, using [TCLI](<https://github.com/thunderstore-io/thunderstore-cli>).
-
-You can build Thunderstore packages by running:
-
-```sh
-dotnet build -c Release -target:PackTS -v d
+[BepInAutoPlugin]
+public partial class Plugin: : BaseUnityPlugin
+{
+  private void Awake()
+  {
+    var myPotion = new Potion
+    {
+	    name = "Speedy Potion",
+	    drinkTime = 4.5f, // default drink time for most built-in potions
+	    id = "speedy",
+		effects = [
+			new IncreasedSpeed(120f),
+		],
+		liquidColour = new Color(1, 0, 0), // red
+		recipe = ["Energy Drink", "Red Crispberry"] // the UIData.name of the item
+    }
+    PotionAPI.RegisterPotion(myPotion);
+  }
+}
 ```
-
-> [!NOTE]  
-> You can learn about different build options with `dotnet build --help`.  
-> `-c` is short for `--configuration` and `-v d` is `--verbosity detailed`.
-
-The built package will be found at `artifacts/thunderstore/`.
+To make a potion effect, just inherit the PotionEffect class
+```csharp
+using Peak.Afflictions;  
+using Potions.APIs;  
+  
+namespace Potions.PotionEffects;  
+  
+public class IncreasedSpeed(float length) : PotionEffect  
+{  
+    private float len = length;  
+  
+    public override void Drink(Character character)  
+    {    }  
+    public override void Apply(Item item)  
+    {        var infStamina = item.gameObject.AddComponent<Action_ApplyAffliction>();  
+        infStamina.OnCastFinished = true;  
+        var fasterAffliction = new Affliction_FasterBoi  
+        {  
+            drowsyOnEnd = 0f,  
+            totalTime = len  
+        };  
+        infStamina.affliction = fasterAffliction;  
+    }  
+}
+```
