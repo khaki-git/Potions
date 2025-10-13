@@ -111,10 +111,27 @@ public static class BuiltinPotions
                 new Numbness(120f)
             ],
             liquidColour = GetSeededColor("numbness", 0.4f),
-            recipe = ["Clusterberry!", "Cluster Shroom"]
+            recipe = ["Shroom!", "Shroom!"]
         };
         PotionAPI.RegisterPotion(
             numbnessPotion
+        );
+        
+        var selflessness = new Potion
+        {
+            name = "Potion of Selflessness",
+            drinkTime = 4.5f,
+            id = "selflessness",
+            effects =
+            [
+                new ReviveTheHomies(),
+                new Die()
+            ],
+            liquidColour = GetSeededColor("selflessness", 0.8f),
+            recipe = ["Remedy Fungus", "Shelf Fungus"]
+        };
+        PotionAPI.RegisterPotion(
+            selflessness
         );
     }
 }

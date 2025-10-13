@@ -8,7 +8,7 @@ namespace Potions.Juicing;
 
 internal class Bubbles : MonoBehaviour
 {
-    private const int BUBBLES_PER_SECOND = 25;
+    private const int BUBBLES_PER_SECOND = 10;
     private const float BUBBLE_GROW_TIME = 0.4f;
     private const float BUBBLE_IDLE_TIME = 0.5f;
     private const float BUBBLE_POP_TIME = 0.08f;
