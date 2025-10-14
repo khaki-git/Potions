@@ -166,7 +166,7 @@ public static class BuiltinPotions
             recipe = ["Remedy Fungus", "Coconut!"]
         };
         PotionAPI.RegisterPotion(
-            impatience
+            lifesteal
         );
     }
 }
