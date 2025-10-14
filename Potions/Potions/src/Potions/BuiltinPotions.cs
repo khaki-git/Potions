@@ -133,5 +133,40 @@ public static class BuiltinPotions
         PotionAPI.RegisterPotion(
             selflessness
         );
+        
+        var impatience = new Potion
+        {
+            name = "Potion of Impatience",
+            drinkTime = 4.5f,
+            id = "impatience",
+            effects =
+            [
+                new RemoveStatus(1, CharacterAfflictions.STATUSTYPE.Cold),
+                new RemoveStatus(1, CharacterAfflictions.STATUSTYPE.Hot),
+                new RemoveStatus(1, CharacterAfflictions.STATUSTYPE.Poison),
+                new RemoveStatus(1, CharacterAfflictions.STATUSTYPE.Drowsy)
+            ],
+            liquidColour = GetSeededColor("impatience", 0.2f),
+            recipe = ["Shroom!", "Crispberry!"]
+        };
+        PotionAPI.RegisterPotion(
+            impatience
+        );
+        
+        var lifesteal = new Potion // you're honestly a dick if you use this
+        {
+            name = "Potion of Lifesteal",
+            drinkTime = 4.5f,
+            id = "lifesteal",
+            effects =
+            [
+                new Lifesteal(60f)
+            ],
+            liquidColour = GetSeededColor("lifesteal", 1f),
+            recipe = ["Remedy Fungus", "Coconut!"]
+        };
+        PotionAPI.RegisterPotion(
+            impatience
+        );
     }
 }

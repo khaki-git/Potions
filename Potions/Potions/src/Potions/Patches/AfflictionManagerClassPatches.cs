@@ -17,6 +17,9 @@ public class CreateBlankAfflictionPatch
             case CustomAfflictionHelper.POTIONS_ENUM_START + 1:
                 __result = new Affliction_Numbness();
                 return false;
+            case CustomAfflictionHelper.POTIONS_ENUM_START + 2:
+                __result = new Affliction_Lifesteal();
+                return false;
         }
         
         return true;
