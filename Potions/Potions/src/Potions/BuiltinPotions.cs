@@ -168,5 +168,37 @@ public static class BuiltinPotions
         PotionAPI.RegisterPotion(
             lifesteal
         );
+        
+        var levitation = new Potion
+        {
+            name = "Potion of Levitation",
+            drinkTime = 4.5f,
+            id = "levitation",
+            effects =
+            [
+                new Levitation(60f)
+            ],
+            liquidColour = GetSeededColor("levitation", .401337f),
+            recipe = ["Scout Cannon", "Coconut!"]
+        };
+        PotionAPI.RegisterPotion(
+            levitation
+        );
+        
+        var negativity = new Potion
+        {
+            name = "Potion of Negativity",
+            drinkTime = 4.5f,
+            id = "negativity",
+            effects =
+            [
+                new ClearAfflictions()
+            ],
+            liquidColour = GetSeededColor("negativity", .401337f),
+            recipe = ["Shroom!", "Remedy Fungus"]
+        };
+        PotionAPI.RegisterPotion(
+            negativity
+        );
     }
 }

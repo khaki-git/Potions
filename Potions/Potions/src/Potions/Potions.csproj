@@ -9,14 +9,19 @@
 
     <ItemGroup>
       <Reference Include="com.github.PEAKModding.PEAKLib.Core">
-        <HintPath>..\..\..\..\..\..\Documents\peaklib\com.github.PEAKModding.PEAKLib.Core.dll</HintPath>
+        <HintPath>$(SolutionRoot)lib/PEAKLib/com.github.PEAKModding.PEAKLib.Core.dll</HintPath>
       </Reference>
       <Reference Include="com.github.PEAKModding.PEAKLib.Items">
-        <HintPath>..\..\..\..\..\..\Documents\peaklib\com.github.PEAKModding.PEAKLib.Items.dll</HintPath>
+        <HintPath>$(SolutionRoot)lib/PEAKLib/com.github.PEAKModding.PEAKLib.Items.dll</HintPath>
       </Reference>
       <Reference Include="com.github.PEAKModding.PEAKLib.Stats">
-        <HintPath>..\..\..\..\..\..\Documents\peaklib\com.github.PEAKModding.PEAKLib.Stats.dll</HintPath>
+        <HintPath>$(SolutionRoot)lib/PEAKLib/com.github.PEAKModding.PEAKLib.Stats.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="PEAKModding.PEAKLib.Core" Version="1.6.0" />
+      <PackageReference Include="PEAKModding.PEAKLib.Items" Version="1.6.0" />
     </ItemGroup>
 
 </Project>

@@ -56,13 +56,11 @@ public class Cauldron: MonoBehaviour, IInteractibleConstant
         timeRemaining = Mathf.Max(0f, (float)remaining);
         if (timeRemaining > 0f) return;
 
-        if (HasNetworkAuthority)
+        if (!HasNetworkAuthority) return;
+        HandleFireExpired();
+        if (HasNetwork)
         {
-            HandleFireExpired();
-            if (HasNetwork)
-            {
-                photonView.RPC("RPC_HandleFireExpired", RpcTarget.Others);
-            }
+            photonView.RPC("RPC_HandleFireExpired", RpcTarget.Others);
         }
     }
 
@@ -96,13 +94,11 @@ public class Cauldron: MonoBehaviour, IInteractibleConstant
     public string GetInteractionText()
     {
         if (storedItems == maxStoredItems) return "boil";
-        switch (ignited)
+        return ignited switch
         {
-            case true:
-                return "add";
-            case false:
-                return "light";
-        }
+            true => "add",
+            false => "light"
+        };
     }
 
     public string GetName()
@@ -176,7 +172,7 @@ public class Cauldron: MonoBehaviour, IInteractibleConstant
         }
     }
 
-    private bool HasNetwork => PhotonNetwork.IsConnected && PhotonNetwork.CurrentRoom != null;
+    private static bool HasNetwork => PhotonNetwork.IsConnected && PhotonNetwork.CurrentRoom != null;
 
     private bool HasNetworkAuthority => !HasNetwork || PhotonNetwork.IsMasterClient;
 
@@ -187,7 +183,7 @@ public class Cauldron: MonoBehaviour, IInteractibleConstant
         return view != null ? view.ViewID : -1;
     }
 
-    private double GetNetworkTime()
+    private static double GetNetworkTime()
     {
         return HasNetwork ? PhotonNetwork.Time : Time.time;
     }

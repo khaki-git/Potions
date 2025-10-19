@@ -20,6 +20,9 @@ public class CreateBlankAfflictionPatch
             case CustomAfflictionHelper.POTIONS_ENUM_START + 2:
                 __result = new Affliction_Lifesteal();
                 return false;
+            case CustomAfflictionHelper.POTIONS_ENUM_START + 3:
+                __result = new Affliction_Levitation();
+                return false;
         }
         
         return true;
