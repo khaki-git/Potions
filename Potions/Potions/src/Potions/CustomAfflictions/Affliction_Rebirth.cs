@@ -5,21 +5,11 @@ namespace Potions.CustomAfflictions;
 
 using UnityEngine;
 
-public sealed class Affliction_Levitation : Affliction
+public sealed class Affliction_Rebirth : Affliction
 {
-    private int stacking = 0;
     public override void UpdateEffect()
     {
-        if (character.IsLocal)
-        {
-            for (var i = 0; i < character.refs.ragdoll.partList.Count; i++)
-            {
-                if (!character.data.isGrounded)
-                {
-                    character.refs.ragdoll.partList[i].Gravity(character.refs.movement.GetGravityForce( ) * character.data.currentRagdollControll * (-.45f * stacking));
-                }
-            }
-        }
+        character.refs.customization.PulseStatus(new Color(0.7f, 0.7f, 0.3f));
     }
 
     public override void OnApplied()
@@ -32,27 +22,24 @@ public sealed class Affliction_Levitation : Affliction
 
     public override void Stack(Affliction incomingAffliction)
     {
-        if (incomingAffliction is Affliction_Levitation)
+        if (incomingAffliction is Affliction_Rebirth)
         {
             totalTime += incomingAffliction.totalTime;
-            stacking++;
         }
     }
 
     public override AfflictionType GetAfflictionType()
     {
-        return (AfflictionType)CustomAfflictionHelper.WhatIsMyNumber(3);
+        return (AfflictionType)CustomAfflictionHelper.WhatIsMyNumber(4);
     }
 
     public override void Serialize(BinarySerializer serializer)
     {
         serializer.WriteFloat(totalTime);
-        serializer.WriteInt(stacking);
     }
 
     public override void Deserialize(BinaryDeserializer serializer)
     {
         totalTime = serializer.ReadFloat();
-        stacking = serializer.ReadInt();
     }
 }

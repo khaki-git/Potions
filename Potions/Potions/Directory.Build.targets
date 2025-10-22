@@ -48,4 +48,23 @@
     <Exec Command="dotnet tcli $(BuildArgument) --package-version $(Version)" />
   </Target>
 
+  <!-- Maintain legacy bin/<Configuration> outputs alongside artifacts output -->
+  <PropertyGroup>
+    <LegacyOutputDir Condition="'$(LegacyOutputDir)' == ''">$(MSBuildProjectDirectory)/bin/$(Configuration)/</LegacyOutputDir>
+  </PropertyGroup>
+
+  <Target Name="CopyArtifactsToLegacyBin"
+          AfterTargets="Build"
+          Condition="'$(CopyArtifactsToLegacyBin)' != 'false'">
+    <ItemGroup>
+      <!-- Mirror everything generated in the artifacts output directory -->
+      <ArtifactsOutputFiles Include="$(TargetDir)**/*" />
+    </ItemGroup>
+    <MakeDir Directories="$(LegacyOutputDir)" />
+    <Copy
+      SourceFiles="@(ArtifactsOutputFiles)"
+      DestinationFiles="@(ArtifactsOutputFiles->'$(LegacyOutputDir)%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="true" />
+  </Target>
+
 </Project>

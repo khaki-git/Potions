@@ -14,7 +14,7 @@ public class Action_Potion: ItemAction
         foreach (var pe in realPotion.effects)
         {
             Debug.Log("Drank!");
-            pe.Drink(character);
+            pe.Drink(character, GetComponent<Item>());
         }
     }
 

@@ -19,6 +19,7 @@ public partial class Plugin : BaseUnityPlugin
     internal static ManualLogSource Log { get; private set; } = null!;
     internal static ModDefinition modDefinition;
     internal static string cauldronId = "cauldron_campfire";
+    internal static GameObject voidTile;
 
     internal static SFX_Instance FireStarted;
 
@@ -72,6 +73,13 @@ public partial class Plugin : BaseUnityPlugin
                 
                 PotionAPI.CreatePotionRegisterables(basePotion, peakBundle.Mod);
                 peakBundle.Mod.RegisterContent();
+                
+                voidTile = peakBundle.LoadAsset<GameObject>("VoidTile");
+                PatchMaterialShader(voidTile, "W/Peak_Rock");
+                foreach (Transform tf in voidTile.transform)
+                {
+                    PatchMaterialShader(tf.gameObject, "W/Peak_Rock");
+                }
             }
         );
     } 

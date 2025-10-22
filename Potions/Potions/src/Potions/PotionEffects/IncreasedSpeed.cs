@@ -7,7 +7,7 @@ public class IncreasedSpeed(float length) : PotionEffect
 {
     private float len = length;
 
-    public override void Drink(Character character)
+    public override void Drink(Character character, Item item)
     {
     }
 

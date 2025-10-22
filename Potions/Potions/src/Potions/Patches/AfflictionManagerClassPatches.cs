@@ -23,6 +23,9 @@ public class CreateBlankAfflictionPatch
             case CustomAfflictionHelper.POTIONS_ENUM_START + 3:
                 __result = new Affliction_Levitation();
                 return false;
+            case CustomAfflictionHelper.POTIONS_ENUM_START + 4:
+                __result = new Affliction_Rebirth();
+                return false;
         }
         
         return true;

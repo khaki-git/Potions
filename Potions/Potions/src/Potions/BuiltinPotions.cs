@@ -200,5 +200,109 @@ public static class BuiltinPotions
         PotionAPI.RegisterPotion(
             negativity
         );
+        
+        var anti = new Potion
+        {
+            name = "Antimatter Potion",
+            drinkTime = 4.5f,
+            id = "antimatter",
+            effects =
+            [
+                new AntimatterExplosion(),
+                new Die()
+            ],
+            liquidColour = new Color(0.2f, 0.2f, 1),
+            recipe = ["Crispberry!", "anti-rope!"]
+        };
+        PotionAPI.RegisterPotion(
+            anti
+        );
+        
+        // Antimatter Potions
+        
+        var literallynothinglmfao = new Potion
+        {
+            name = "Potion?",
+            drinkTime = 4.5f,
+            id = "literallynothinglmfao",
+            effects =
+            [
+                
+            ],
+            liquidColour = new Color(1,1,1),
+            recipe = ["Antimatter Potion", "Antimatter Potion"]
+        };
+        PotionAPI.RegisterPotion(
+            literallynothinglmfao
+        );
+        
+        var positivity = new Potion
+        {
+            name = "Potion of Positivity",
+            drinkTime = 4.5f,
+            id = "positivity",
+            effects =
+            [
+                new IncreasedSpeed(60),
+                new InfiniteStamina(60),
+                new Levitation(60),
+                new Lifesteal(60),
+                new Potion_MoraleBoost(),
+                new Numbness(60),
+                new Poisoned(50),
+                new Rebirth(60),
+                new ReviveTheHomies(),
+                new Temperate(60),
+                new AntimatterExplosion()
+            ],
+            liquidColour = GetSeededColor("positivity", .401337f),
+            recipe = ["Potion of Negativity", "Antimatter Potion"]
+        };
+        PotionAPI.RegisterPotion(
+            positivity
+        );
+        
+        var selfishness = new Potion
+        {
+            name = "Potion of Selfishness",
+            drinkTime = 4.5f,
+            id = "selfishness",
+            effects =
+            [
+                new ReviveTheHomies(),
+                
+                new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Cold),
+                new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Hot),
+                new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Hunger),
+                new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Thorns),
+                new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Injury),
+                new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Poison),
+                new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Drowsy),
+                new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Curse),
+                
+                new KillRandomMf()
+            ],
+            liquidColour = GetSeededColor("selfishness", 0.8f),
+            recipe = ["Remedy Fungus", "Shelf Fungus"]
+        };
+        PotionAPI.RegisterPotion(
+            selfishness
+        );
+        
+        var rebirthPoison = new Potion
+        {
+            name = "Potion of Rebirth",
+            drinkTime = 0.5f,
+            id = "Rebirth",
+            effects =
+            [
+                new Rebirth(60)
+            ],
+            liquidColour = new Color(1, 1, .2f),
+            recipe = ["Rat Poison", "Antimatter Potion"]
+        };
+        PotionAPI.RegisterPotion(
+            rebirthPoison
+        );
     }
 }

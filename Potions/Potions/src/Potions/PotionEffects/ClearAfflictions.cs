@@ -4,7 +4,7 @@ namespace Potions.PotionEffects;
 
 public class ClearAfflictions: PotionEffect
 {
-    public override void Drink(Character character)
+    public override void Drink(Character character, Item item)
     {
         foreach (var aff in character.refs.afflictions.afflictionList)
         {

@@ -4,7 +4,7 @@ namespace Potions.PotionEffects;
 
 public class Die: PotionEffect
 {
-    public override void Drink(Character character)
+    public override void Drink(Character character, Item item)
     {
         character.Invoke("DieInstantly", 0.02f);
     }

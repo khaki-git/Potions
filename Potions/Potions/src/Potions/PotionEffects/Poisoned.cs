@@ -7,7 +7,7 @@ public class Poisoned(float damage) : PotionEffect
 {
     private float dmg = damage;
 
-    public override void Drink(Character character)
+    public override void Drink(Character character, Item item)
     {
     }
 

@@ -7,15 +7,15 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Potions.PotionEffects;
 
-public class ReviveTheHomies: PotionEffect
+public class KillRandomMf: PotionEffect
 {
     public override void Drink(Character character, Item _item)
     {
-        var list = Character.AllCharacters.Where(allCharacter => allCharacter.data.dead || allCharacter.data.fullyPassedOut).ToList();
+        var list = Character.AllCharacters.Where(allCharacter => !allCharacter.data.dead && !allCharacter.data.fullyPassedOut && allCharacter != character).ToList();
 
         foreach (var item in list)
         {
-            item.photonView.RPC("RPCA_ReviveAtPosition", RpcTarget.All, character.Center + Vector3.up * 3, false);
+            item.photonView.RPC("RPCA_Die", RpcTarget.All, character.Center + Vector3.up * 3, false);
         }
     }
 
