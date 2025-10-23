@@ -80,6 +80,13 @@ public partial class Plugin : BaseUnityPlugin
                 {
                     PatchMaterialShader(tf.gameObject, "W/Peak_Rock");
                 }
+                
+                var rubberducky = peakBundle.LoadAsset<GameObject>("RubberFuck");
+                PatchMaterialShader(rubberducky.transform.Find("default").gameObject, "W/Character");
+                rubberducky.name = "Rubberducky";
+                rubberducky.AddComponent<PhotonView>();
+                rubberducky.AddComponent<Biodegradable>();
+                NetworkPrefabManager.RegisterNetworkPrefab("Rubberducky", rubberducky);
             }
         );
     } 

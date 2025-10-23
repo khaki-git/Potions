@@ -201,6 +201,56 @@ public static class BuiltinPotions
             negativity
         );
         
+        var ducky = new Potion
+        {
+            name = "Duck in a Bottle",
+            drinkTime = 4.5f,
+            id = "ducky",
+            effects =
+            [
+                new Ducky()
+            ],
+            liquidColour = GetSeededColor("duck", .7f),
+            recipe = ["Napberry", "Kingberry!"]
+        };
+        PotionAPI.RegisterPotion(
+            ducky
+        );
+        
+        var employment = new Potion
+        {
+            name = "Potion of Employment",
+            drinkTime = 4.5f,
+            id = "employment",
+            effects =
+            [
+                new ForceQuitTheGameLmfao()
+            ],
+            liquidColour = GetSeededColor("employment", .7f),
+            recipe = ["Ancient Idol", "Potion of Happiness"]
+        };
+        PotionAPI.RegisterPotion(
+            employment
+        );
+        
+        // todo: cannibal potion
+        
+        var tornado = new Potion
+        {
+            name = "Sandstorm in a Bottle",
+            drinkTime = 4.5f,
+            id = "tornado",
+            effects =
+            [
+                new SpawnPrefab("Tornado", false)
+            ],
+            liquidColour = GetSeededColor("sandstorm", .7f),
+            recipe = ["Prickleberry!", "rope spool"]
+        };
+        PotionAPI.RegisterPotion(
+            tornado
+        );
+        
         var anti = new Potion
         {
             name = "Antimatter Potion",
@@ -303,6 +353,22 @@ public static class BuiltinPotions
         };
         PotionAPI.RegisterPotion(
             rebirthPoison
+        );
+        
+        var tumbleweed = new Potion
+        {
+            name = "Tumbleweed in a Bottle",
+            drinkTime = 4.5f,
+            id = "tumbleweed",
+            effects =
+            [
+                new SpawnPrefab("Tumbleweed", true, 5)
+            ],
+            liquidColour = GetSeededColor("tumbleweed", .2f),
+            recipe = ["Sandstorm in a Bottle", "Antimatter Potion"]
+        };
+        PotionAPI.RegisterPotion(
+            tumbleweed
         );
     }
 }
