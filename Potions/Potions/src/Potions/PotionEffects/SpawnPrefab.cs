@@ -16,7 +16,7 @@ public class SpawnPrefab(string prefab, bool separate, int amount = 1): PotionEf
                 // offset the ~~tumbleweed~~ prefab
                 loc += new Vector3(Random.Range(-35, 35), 0f, Random.Range(-35, 35));
             }
-            PhotonNetwork.Instantiate(prefab, loc, Quaternion.identity);
+            ObjectSpawnerInterface.singleton.SpawnObject(new SpawnRequest(prefab, loc, Quaternion.identity), view => {});
         }
     }
 

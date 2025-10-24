@@ -9,6 +9,7 @@ using PEAKLib.Items;
 using PEAKLib.Items.UnityEditor;
 using Potions.APIs;
 using Potions.Juicing;
+using UnityEngine.SceneManagement;
 
 namespace Potions;
 
@@ -42,6 +43,23 @@ public partial class Plugin : BaseUnityPlugin
         
         // init them
         _spawner.BindToScene();
+
+        var manager = new GameObject("ObjSpawner");
+        manager.AddComponent<PhotonView>();
+        manager.AddComponent<ObjectSpawnerInterface>();
+        
+        NetworkPrefabManager.RegisterNetworkPrefab("PotionsObjectSpawner", manager);
+        
+        // network bullshit
+        SceneManager.sceneLoaded += (Scene scene, LoadSceneMode _mode) =>
+        {
+            if (scene.name != "Airport" && scene.name != "Wilisland" && !scene.name.StartsWith("Level_")) return;
+            // create the manager
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Instantiate("PotionsObjectSpawner", Vector3.zero, Quaternion.identity);
+            }
+        };
         
         // other
         this.LoadBundleWithName(

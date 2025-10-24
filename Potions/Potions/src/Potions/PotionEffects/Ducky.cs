@@ -12,8 +12,11 @@ public class Ducky: PotionEffect
     {
         for (var i = 0; i < Random.Range(10, 20); i++)
         {
-            var d = NetworkPrefabManager.SpawnNetworkPrefab("Rubberducky", character.Center, Quaternion.identity);
-            d.GetComponent<Rigidbody>().AddForce(Random.insideUnitSphere * Random.Range(15,50), ForceMode.Impulse);
+            ObjectSpawnerInterface.singleton.SpawnObject(
+                new SpawnRequest("Rubberducky", character.Center, Quaternion.identity), view =>
+                {
+                    view.GetComponent<Rigidbody>().AddForce(Random.insideUnitSphere * Random.Range(15,50), ForceMode.Impulse);
+                });
         }
         character.DieInstantlyWithoutSkeleton();
     }
