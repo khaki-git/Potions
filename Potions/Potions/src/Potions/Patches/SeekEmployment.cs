@@ -24,10 +24,8 @@ namespace Potions.Patches
         [PunRPC]
         private void RPCA_SeekEmployment()
         {
+            Application.OpenURL("https://www.linkedin.com/");
             Application.Quit();
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
         }
     }
 }
