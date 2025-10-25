@@ -39,11 +39,9 @@ public class CauldronSpawner
         normal = normal.sqrMagnitude > 0f ? normal.normalized : Vector3.forward;
         var up = upHint.sqrMagnitude > 0f ? upHint.normalized : Vector3.up;
 
-        if (Mathf.Abs(Vector3.Dot(normal, up)) > 0.999f)
-        {
-            var arbitrary = Mathf.Abs(normal.x) < 0.9f ? Vector3.right : Vector3.forward;
-            up = Vector3.Cross(normal, arbitrary).normalized;
-        }
+        if (!(Mathf.Abs(Vector3.Dot(normal, up)) > 0.999f)) return Quaternion.LookRotation(normal, up);
+        var arbitrary = Mathf.Abs(normal.x) < 0.9f ? Vector3.right : Vector3.forward;
+        up = Vector3.Cross(normal, arbitrary).normalized;
 
         return Quaternion.LookRotation(normal, up);
     }
@@ -59,9 +57,7 @@ public class CauldronSpawner
         var radians = Random.Range(0f, 360f) * Mathf.Deg2Rad;
         var cauldronHead = cauldronSpawnerHead + new Vector3(Mathf.Cos(radians), 0, Mathf.Sin(radians)) * Radius;
 
-        RaycastHit hit;
-        
-        if (Physics.Raycast(cauldronHead, Vector3.down, out hit, Mathf.Infinity))
+        if (Physics.Raycast(cauldronHead, Vector3.down, out var hit, Mathf.Infinity))
         { 
             var cauldronRot = FromHitNormal(hit, Vector3.up);
             var cauldron = NetworkPrefabManager.SpawnNetworkPrefab(Plugin.cauldronId, hit.point + Vector3.up * NudgeUp, cauldronRot);

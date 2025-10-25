@@ -26,6 +26,9 @@ public class CreateBlankAfflictionPatch
             case CustomAfflictionHelper.POTIONS_ENUM_START + 4:
                 __result = new Affliction_Rebirth();
                 return false;
+            case CustomAfflictionHelper.POTIONS_ENUM_START + 5:
+                __result = new Affliction_Pinata();
+                return false;
         }
         
         return true;

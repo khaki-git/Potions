@@ -105,6 +105,14 @@ public partial class Plugin : BaseUnityPlugin
                 rubberducky.AddComponent<PhotonView>();
                 rubberducky.AddComponent<Biodegradable>();
                 NetworkPrefabManager.RegisterNetworkPrefab("Rubberducky", rubberducky);
+                
+                // item names
+                LocalizedText.mainTable["NAME_CANDY"] = ["CANDY"];
+
+                /*foreach (var content in peakBundle.Mod.RegisteredContent)
+                {
+                    Debug.Log(content.Content.Name);
+                }*/
             }
         );
     } 

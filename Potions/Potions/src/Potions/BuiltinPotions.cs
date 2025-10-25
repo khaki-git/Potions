@@ -217,6 +217,22 @@ public static class BuiltinPotions
             ducky
         );
         
+        var pinata = new Potion
+        {
+            name = "Pinata Potion",
+            drinkTime = 4.5f,
+            id = "pinata",
+            effects =
+            [
+                new Pinata(240)
+            ],
+            liquidColour = GetSeededColor("pinata", .7f),
+            recipe = ["Shroom!", "Kingberry!"]
+        };
+        PotionAPI.RegisterPotion(
+            pinata
+        );
+        
         var employment = new Potion
         {
             name = "Potion of Employment",

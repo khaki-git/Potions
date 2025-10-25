@@ -1,5 +1,6 @@
 using System.Linq;
 using Peak.Afflictions;
+using Potions.Patches;
 using Zorro.Core.Serizalization;
 
 namespace Potions.CustomAfflictions;
@@ -34,8 +35,9 @@ public sealed class Affliction_Lifesteal : Affliction
                     if (status > 0.01f)
                     {
                         var amount = Mathf.Clamp(status, 0, SPEED * Time.deltaTime);
-                        character.refs.afflictions.SubtractStatus((CharacterAfflictions.STATUSTYPE)x, amount);
+                        character.AddStatusToThisMyselfOverRPCOkayGotIt((CharacterAfflictions.STATUSTYPE)x, amount);
                         affs.AddStatus((CharacterAfflictions.STATUSTYPE)x, amount);
+                        target.refs.customization.PulseStatus(Color.black);
                         healed = true;
                     }
                     x++;

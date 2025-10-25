@@ -15,7 +15,8 @@ public class Ducky: PotionEffect
             ObjectSpawnerInterface.singleton.SpawnObject(
                 new SpawnRequest("Rubberducky", character.Center, Quaternion.identity), view =>
                 {
-                    view.GetComponent<Rigidbody>().AddForce(Random.insideUnitSphere * Random.Range(15,50), ForceMode.Impulse);
+                    view.GetComponent<Rigidbody>()
+                        .AddForce(Random.insideUnitSphere * Random.Range(15, 50), ForceMode.Impulse);
                 });
         }
         character.DieInstantlyWithoutSkeleton();
