@@ -319,7 +319,8 @@ public static class BuiltinPotions
                 new Rebirth(60),
                 new ReviveTheHomies(),
                 new Temperate(60),
-                new AntimatterExplosion()
+                new AntimatterExplosion(),
+                new Pinata(60)
             ],
             liquidColour = GetSeededColor("positivity", .401337f),
             recipe = ["Potion of Negativity", "Antimatter Potion"]

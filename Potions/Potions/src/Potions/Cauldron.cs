@@ -205,6 +205,7 @@ public class Cauldron: MonoBehaviour, IInteractibleConstant
         dead = false;
         igniteEndTimestamp = endTimestamp;
         timeRemaining = Mathf.Max(0f, (float)(igniteEndTimestamp - GetNetworkTime()));
+        transform.Find("Boils").gameObject.SetActive(true);
 
         foreach (var particleSys in enableWhenLitParticles)
         {
@@ -228,6 +229,7 @@ public class Cauldron: MonoBehaviour, IInteractibleConstant
 
     private void StopIgniteVisuals(bool markDead)
     {
+        transform.Find("Boils").gameObject.SetActive(false);
         ignited = false;
         dead = markDead;
         igniteEndTimestamp = 0;

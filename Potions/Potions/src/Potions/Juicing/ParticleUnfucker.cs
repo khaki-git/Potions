@@ -8,7 +8,7 @@ internal static class ParticleUnfucker
     {
         if (targetObject == null || string.IsNullOrEmpty(shaderName))
         {
-            Debug.LogWarning("ERROR.");
+            Debug.LogWarning("wtf");
             return;
         }
 
@@ -16,7 +16,7 @@ internal static class ParticleUnfucker
         var newShader = Shader.Find(shaderName);
 
 
-        ParticleSystemRenderer[] renderers = targetObject.GetComponentsInChildren<ParticleSystemRenderer>();
+        var renderers = targetObject.GetComponentsInChildren<ParticleSystemRenderer>();
 
 
         foreach (var psRenderer in renderers)
