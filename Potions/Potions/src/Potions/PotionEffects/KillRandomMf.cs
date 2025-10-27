@@ -15,7 +15,7 @@ public class KillRandomMf: PotionEffect
 
         foreach (var item in list)
         {
-            item.photonView.RPC("RPCA_Die", RpcTarget.All, character.Center + Vector3.up * 3, false);
+            item.Invoke("DieInstantly", 0.02f);
         }
     }
 

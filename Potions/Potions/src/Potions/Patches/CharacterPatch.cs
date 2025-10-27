@@ -10,10 +10,9 @@ public class CharacterPatch
 {
     private static bool Prefix(Character __instance)
     {
-        Affliction ignored;
         if (!(__instance.data.deathTimer > 0.9f) ||
             !__instance.refs.afflictions.HasAfflictionType(
-                (Affliction.AfflictionType)CustomAfflictionHelper.POTIONS_ENUM_START + 4, out ignored)) return true;
+                (Affliction.AfflictionType)CustomAfflictionHelper.POTIONS_ENUM_START + 4, out _)) return true;
         __instance.RPCA_ReviveAtPosition(__instance.Center + Vector3.up * 5, false);
         return false;
 
