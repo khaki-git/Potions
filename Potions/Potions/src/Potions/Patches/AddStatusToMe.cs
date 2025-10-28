@@ -1,3 +1,4 @@
+using HarmonyLib;
 using Photon.Pun;
 using UnityEngine;
 
@@ -39,6 +40,18 @@ namespace Potions.Patches
                 {
                     afflictions.AddStatus(statusType, amount);
                 }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Character), nameof(Character.Awake))]
+    internal static class EnsureStatusAdderHelperPatch
+    {
+        private static void Postfix(Character __instance)
+        {
+            if (!__instance.TryGetComponent<AddStatusToMePatch.StatusAdderHelper>(out _))
+            {
+                __instance.gameObject.AddComponent<AddStatusToMePatch.StatusAdderHelper>();
             }
         }
     }

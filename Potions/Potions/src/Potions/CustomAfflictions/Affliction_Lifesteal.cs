@@ -25,19 +25,14 @@ public sealed class Affliction_Lifesteal : Affliction
             return;
         }
 
-        var statuses = selfAfflictions.currentStatuses;
-        if (statuses == null)
-        {
-            return;
-        }
-
         var maxTransfer = SPEED * Time.deltaTime;
         if (maxTransfer <= 0f)
         {
             return;
         }
 
-        var healed = false;
+        var totalStolen = 0f;
+        var anyTargetHit = false;
         var maxDistanceSqr = DISTANCE * DISTANCE;
 
         foreach (var target in Character.AllCharacters)
@@ -66,28 +61,19 @@ public sealed class Affliction_Lifesteal : Affliction
             }
 
             var targetCustomization = targetRefs.customization;
-            var statusIndex = 0;
 
-            foreach (var status in statuses)
-            {
-                if (status > 0.01f)
-                {
-                    var amount = Mathf.Min(status, maxTransfer);
-                    if (amount > 0f)
-                    {
-                        target.AddStatusToThisMyselfOverRPCOkayGotIt((CharacterAfflictions.STATUSTYPE)statusIndex, amount);
-                        selfAfflictions.SubtractStatus((CharacterAfflictions.STATUSTYPE)statusIndex, amount);
-                        targetCustomization?.PulseStatus(Color.black);
-                        healed = true;
-                    }
-                }
-
-                statusIndex++;
-            }
+            target.AddStatusToThisMyselfOverRPCOkayGotIt(CharacterAfflictions.STATUSTYPE.Injury, maxTransfer);
+            targetCustomization?.PulseStatus(Color.black);
+            totalStolen += maxTransfer;
+            anyTargetHit = true;
         }
 
-        if (healed)
+        if (anyTargetHit)
         {
+            if (totalStolen > 0f)
+            {
+                selfAfflictions.SubtractStatus(CharacterAfflictions.STATUSTYPE.Injury, totalStolen);
+            }
             selfRefs?.customization?.PulseStatus(new Color(0.1f, 1f, 0.1f));
         }
     }

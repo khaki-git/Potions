@@ -16,7 +16,7 @@ public sealed class Affliction_Levitation : Affliction
             {
                 if (!character.data.isGrounded)
                 {
-                    character.refs.ragdoll.partList[i].Gravity(character.refs.movement.GetGravityForce( ) * character.data.currentRagdollControll * (-.45f * stacking));
+                    character.refs.ragdoll.partList[i].Gravity(character.refs.movement.GetGravityForce( ) * character.data.currentRagdollControll * (-2.5f * stacking));
                 }
             }
         }

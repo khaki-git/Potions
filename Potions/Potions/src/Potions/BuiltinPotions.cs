@@ -336,8 +336,6 @@ public static class BuiltinPotions
             id = "selfishness",
             effects =
             [
-                new ReviveTheHomies(),
-                
                 new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Cold),
                 new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Hot),
                 new RemoveStatus(255, CharacterAfflictions.STATUSTYPE.Hunger),
@@ -374,12 +372,12 @@ public static class BuiltinPotions
         
         var tumbleweed = new Potion
         {
-            name = "Tumbleweed in a Bottle",
+            name = "Tumbleweed(s) in a Bottle",
             drinkTime = 4.5f,
             id = "tumbleweed",
             effects =
             [
-                new SpawnPrefab("Tumbleweed", true, 5)
+                new SpawnPrefab("Tumbleweed", true, 25)
             ],
             liquidColour = GetSeededColor("tumbleweed", .2f),
             recipe = ["Sandstorm in a Bottle", "Antimatter Potion"]
