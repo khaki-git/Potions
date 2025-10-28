@@ -1,4 +1,3 @@
-using System.Linq;
 using Peak.Afflictions;
 using Potions.Patches;
 using Zorro.Core.Serizalization;
@@ -14,40 +13,82 @@ public sealed class Affliction_Lifesteal : Affliction
     
     public override void UpdateEffect()
     {
-        if (character.IsLocal)
+        if (!character.IsLocal)
         {
-            var targets = Character.AllCharacters.Where(otherCharacter =>
+            return;
+        }
+
+        var selfRefs = character.refs;
+        var selfAfflictions = selfRefs?.afflictions;
+        if (selfAfflictions == null)
+        {
+            return;
+        }
+
+        var statuses = selfAfflictions.currentStatuses;
+        if (statuses == null)
+        {
+            return;
+        }
+
+        var maxTransfer = SPEED * Time.deltaTime;
+        if (maxTransfer <= 0f)
+        {
+            return;
+        }
+
+        var healed = false;
+        var maxDistanceSqr = DISTANCE * DISTANCE;
+
+        foreach (var target in Character.AllCharacters)
+        {
+            if (target == null || target == character || target.IsLocal)
             {
-                if (otherCharacter.data.dead || otherCharacter.data.fullyPassedOut || otherCharacter.IsLocal)
-                    return false;
-                return !((otherCharacter.Center - character.Center).magnitude > DISTANCE);
-            });
+                continue;
+            }
 
-            var healed = false;
-
-            foreach (var target in targets)
+            var targetData = target.data;
+            if (targetData == null || targetData.dead || targetData.fullyPassedOut)
             {
-                var affs = target.refs.afflictions;
+                continue;
+            }
 
-                var x = 0;
-                foreach (var status in character.refs.afflictions.currentStatuses)
+            var offset = target.Center - character.Center;
+            if (offset.sqrMagnitude > maxDistanceSqr)
+            {
+                continue;
+            }
+
+            var targetRefs = target.refs;
+            if (targetRefs?.afflictions == null)
+            {
+                continue;
+            }
+
+            var targetCustomization = targetRefs.customization;
+            var statusIndex = 0;
+
+            foreach (var status in statuses)
+            {
+                if (status > 0.01f)
                 {
-                    if (status > 0.01f)
+                    var amount = Mathf.Min(status, maxTransfer);
+                    if (amount > 0f)
                     {
-                        var amount = Mathf.Clamp(status, 0, SPEED * Time.deltaTime);
-                        target.AddStatusToThisMyselfOverRPCOkayGotIt((CharacterAfflictions.STATUSTYPE)x, amount);
-                        affs.SubtractStatus((CharacterAfflictions.STATUSTYPE)x, amount);
-                        target.refs.customization.PulseStatus(Color.black);
+                        target.AddStatusToThisMyselfOverRPCOkayGotIt((CharacterAfflictions.STATUSTYPE)statusIndex, amount);
+                        selfAfflictions.SubtractStatus((CharacterAfflictions.STATUSTYPE)statusIndex, amount);
+                        targetCustomization?.PulseStatus(Color.black);
                         healed = true;
                     }
-                    x++;
                 }
-            }
 
-            if (healed)
-            {
-                character.refs.customization.PulseStatus(new Color(0.1f, 1f, 0.1f));
+                statusIndex++;
             }
+        }
+
+        if (healed)
+        {
+            selfRefs?.customization?.PulseStatus(new Color(0.1f, 1f, 0.1f));
         }
     }
 

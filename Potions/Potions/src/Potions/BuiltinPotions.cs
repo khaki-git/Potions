@@ -236,7 +236,7 @@ public static class BuiltinPotions
         var employment = new Potion
         {
             name = "Potion of Employment",
-            drinkTime = 4.5f,
+            drinkTime = .2f,
             id = "employment",
             effects =
             [
