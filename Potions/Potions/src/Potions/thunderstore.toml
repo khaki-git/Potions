@@ -25,6 +25,10 @@ source = "../../artifacts/bin/Potions/release/com.khakixd.potions.dll"
 target = "plugins/"
 
 [[build.copy]]
+source = "../../artifacts/bin/Potions/release/com.khakixd.potions.dll"
+target = "plugins/"
+
+[[build.copy]]
 source = "../../CHANGELOG.md"
 target = "/"
 

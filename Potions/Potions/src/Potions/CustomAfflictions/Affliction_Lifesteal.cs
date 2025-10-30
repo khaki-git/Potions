@@ -62,9 +62,12 @@ public sealed class Affliction_Lifesteal : Affliction
 
             var targetCustomization = targetRefs.customization;
 
-            target.AddStatusToThisMyselfOverRPCOkayGotIt(CharacterAfflictions.STATUSTYPE.Injury, maxTransfer);
-            targetCustomization?.PulseStatus(Color.black);
-            totalStolen += maxTransfer;
+            if (selfAfflictions.GetCurrentStatus(CharacterAfflictions.STATUSTYPE.Injury) > 0.02)
+            {
+                target.AddStatusToThisMyselfOverRPCOkayGotIt(CharacterAfflictions.STATUSTYPE.Injury, maxTransfer);
+                targetCustomization?.PulseStatus(Color.black);
+                totalStolen += maxTransfer;
+            }
             anyTargetHit = true;
         }
 
