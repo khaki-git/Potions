@@ -25,6 +25,13 @@ public class CauldronSpawner
             foreach (var campfire in campfires)
             {
                 CreateCauldronForCampfire(campfire);
+                log.LogInfo("Spawning Cauldron");
+            }
+
+            foreach (var campfire in GameObjectFinder.FindByName("Campfire-Kiln"))
+            {
+                CreateCauldronForCampfire(campfire);
+                log.LogInfo("Spawning Cauldron");
             }
         };
     }

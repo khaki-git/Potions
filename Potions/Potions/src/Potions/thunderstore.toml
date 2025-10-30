@@ -1,5 +1,5 @@
 [config]
-schemaVersion = "0.0.1"
+schemaVersion = "1.0.0"
 
 [general]
 repository = "https://thunderstore.io"
@@ -8,7 +8,7 @@ repository = "https://thunderstore.io"
 namespace = "khakixd"
 name = "Potions"
 description = "Adds a cauldron to brew potions in PEAK"
-websiteUrl = ""
+websiteUrl = "https://github.com/khaki-git/Potions"
 containsNsfwContent = false
 
 [package.dependencies]
@@ -25,7 +25,7 @@ source = "../../artifacts/bin/Potions/release/com.khakixd.potions.dll"
 target = "plugins/"
 
 [[build.copy]]
-source = "../../artifacts/bin/Potions/release/com.khakixd.potions.dll"
+source = "../../potions.peakbundle"
 target = "plugins/"
 
 [[build.copy]]

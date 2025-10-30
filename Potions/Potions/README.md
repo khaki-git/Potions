@@ -1,7 +1,8 @@
 # Potions
-Adds potions to PEAK which can brewed using two ingredients at a Cauldron. This mod also contains a small API for developers to add their own potions.
+Adds 21 potions to PEAK which can brewed using two ingredients at a Cauldron. This mod also contains a small API for developers to add their own potions.
 
 ### Recipes
+
 
 
 | Name                   | Recipe                                    | Drink Time | Effects                                                                                                                                                                                                        |
@@ -18,7 +19,7 @@ Adds potions to PEAK which can brewed using two ingredients at a Cauldron. This 
 | Potion of Levitation   | Scout Cannon + Any Coconut                | 4.5s       | Levitation for 60s                                                                                                                                                                                             |
 | Potion of Negativity   | Any Shroom + Remedy Fungus                | 4.5s       | Clears all afflictions                                                                                                                                                                                         |
 | Duck in a Bottle       | Napberry + Any Kingberry                  | 4.5s       | Kills the user and spawns a bunch of Rubber Duckies                                                                                                                                                            |
-| Potion of Employment   | Ancient Idol + Potion of Happiness        | 4.5s       | Closes the users game                                                                                                                                                                                          |
+| Potion of Employment   | Ancient Idol + Potion of Happiness        | 4.5s       | Closes the users game and opens LinkedIn                                                                                                                                                                       |
 | Sandstorm in a Bottle  | Any Prickleberry + Rope Spool             | 4.5s       | Summons a Tornado                                                                                                                                                                                              |
 | Antimatter Potion      | Any Crispberry + Any Anti-Rope            | 4.5s       | Triggers an antimatter explosion and kills the user                                                                                                                                                            |
 | Potion?                | Antimatter Potion + Antimatter Potion     | 4.5s       | Literally nothing                                                                                                                                                                                              |
@@ -26,6 +27,9 @@ Adds potions to PEAK which can brewed using two ingredients at a Cauldron. This 
 | Potion of Selfishness  | Remedy Fungus + Shelf Fungus              | 4.5s       | Kills all other teammates, clears virtually all statuses (Cold/Hot/Hunger/Thorns/Injury/Poison/Drowsy/Curse)                                                                                                   |
 | Potion of Rebirth      | Rat Poison + Antimatter Potion            | 0.5s       | Rebirth for 60s (revive on death)                                                                                                                                                                              |
 | Tumbleweed in a Bottle | Sandstorm in a Bottle + Antimatter Potion | 4.5s       | Spawns 5 Tumbleweeds                                                                                                                                                                                           |
+| Pinata Potion          | Any Shroom + Any Kingberry                | 4.5s       | On player death, instantly spawn a bunch of candy and one lollipop                                                                                                                                             |
+|                        |                                           |            |                                                                                                                                                                                                                |
+
 
 
 
@@ -82,3 +86,7 @@ public class IncreasedSpeed(float length) : PotionEffect
     }  
 }
 ```
+
+### Special Mentions (all ~~one~~ two of them)
+Bagel - Multiplayer Testing
+khakixd - the rest of it
